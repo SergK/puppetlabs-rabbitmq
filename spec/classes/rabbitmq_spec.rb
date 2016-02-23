@@ -420,7 +420,7 @@ LimitNOFILE=1234
       it { should contain_class('rabbitmq::service') }
 
      context 'with admin_enable set to true' do
-        let(:params) {{ :admin_enable => true, :node_ip_address => '1.1.1.1' }}
+        let(:params) {{ :admin_enable => true, :management_bind_ip_address => '1.1.1.1' }}
         context 'with service_manage set to true' do
           it 'we enable the admin interface by default' do
             should contain_class('rabbitmq::install::rabbitmqadmin')
@@ -432,14 +432,14 @@ LimitNOFILE=1234
           end
         end
         context 'with service_manage set to true and default user/pass specified' do
-          let(:params) {{ :admin_enable => true, :default_user => 'foobar', :default_pass => 'hunter2', :node_ip_address => '1.1.1.1' }}
+          let(:params) {{ :admin_enable => true, :default_user => 'foobar', :default_pass => 'hunter2', :management_bind_ip_address => '1.1.1.1' }}
           it 'we use the correct URL to rabbitmqadmin' do
             should contain_staging__file('rabbitmqadmin').with_source("http://foobar:hunter2@1.1.1.1:15672/cli/rabbitmqadmin")
           end
         end
         context 'with service_manage set to true and management port specified' do
           # note that the 2.x management port is 55672 not 15672
-          let(:params) {{ :admin_enable => true, :management_port => '55672', :node_ip_address => '1.1.1.1' }}
+          let(:params) {{ :admin_enable => true, :management_port => '55672', :management_bind_ip_address => '1.1.1.1' }}
           it 'we use the correct URL to rabbitmqadmin' do
             should contain_staging__file('rabbitmqadmin').with_source("http://guest:guest@1.1.1.1:55672/cli/rabbitmqadmin")
           end

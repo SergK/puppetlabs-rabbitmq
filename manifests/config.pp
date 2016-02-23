@@ -19,6 +19,7 @@ class rabbitmq::config {
   $erlang_cookie              = $rabbitmq::erlang_cookie
   $interface                  = $rabbitmq::interface
   $management_port            = $rabbitmq::management_port
+  $management_bind_ip_address = $rabbitmq::management_bind_ip_address
   $management_ssl             = $rabbitmq::management_ssl
   $node_ip_address            = $rabbitmq::node_ip_address
   $plugin_dir                 = $rabbitmq::plugin_dir
